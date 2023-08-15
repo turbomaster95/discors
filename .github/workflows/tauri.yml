@@ -34,9 +34,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
            name: app
-           if matrix.platform == 'windows-latest'
+           if: matrix.platform == 'windows-latest'
            path: |
               src-tauri/target/release/discors.exe
-           if matrix.platform == 'ubuntu-20.04'
+           if: matrix.platform == 'ubuntu-20.04'
            path: |
               src-tauri/target/release/discors
