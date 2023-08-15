@@ -29,8 +29,7 @@ jobs:
       - name: install frontend dependencies
         run: npm install
       - name: build app
-        run: |
-	   node node_modules/@tauri-apps/cli/tauri.js build --ci
+        run: node node_modules/@tauri-apps/cli/tauri.js build --ci
       - name: publish artifact
         uses: actions/upload-artifact@v3
         with:
