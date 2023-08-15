@@ -1,0 +1,30 @@
+name: 'build'
+on:
+   push:
+       branches:
+            - main
+   workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+    
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+      - name: install frontend dependencies
+        run: npm install
+      - name: build app
+        run: node node_modules/@tauri-apps/cli/tauri.js build --ci
+      - name: publish artifact
+        uses: actions/upload-artifact@v3
+        with:
+           name: windows
+           path: src-tauri/target/release/discors.exe
